@@ -1,0 +1,40 @@
+let speed = 0
+function turnLeft (theDelay: number) {
+    ContinuousServo.spin_other_way_with_speed(AnalogPin.P13, speed)
+    ContinuousServo.spin_other_way_with_speed(AnalogPin.P14, speed)
+    basic.pause(theDelay)
+}
+function goBackward (theDelay: number) {
+    ContinuousServo.spin_other_way_with_speed(AnalogPin.P13, speed)
+    ContinuousServo.spin_one_way_with_speed(AnalogPin.P14, speed)
+    basic.pause(theDelay)
+}
+function goForward (theDelay: number) {
+    ContinuousServo.spin_one_way_with_speed(AnalogPin.P13, speed)
+    ContinuousServo.spin_other_way_with_speed(AnalogPin.P14, speed)
+    basic.pause(theDelay)
+}
+input.onButtonPressed(Button.A, function () {
+    speed = 40
+    basic.pause(3000)
+})
+function stopMoving (theDelay: number) {
+    ContinuousServo.turn_off_motor(DigitalPin.P13)
+    ContinuousServo.turn_off_motor(DigitalPin.P14)
+    basic.pause(theDelay)
+}
+function turnRight (theDelay: number) {
+    ContinuousServo.spin_one_way_with_speed(AnalogPin.P13, speed)
+    ContinuousServo.spin_one_way_with_speed(AnalogPin.P14, speed)
+    basic.pause(theDelay)
+}
+input.onButtonPressed(Button.B, function () {
+	
+})
+basic.forever(function () {
+    goForward(1000)
+    turnRight(1000)
+    goBackward(1000)
+    turnLeft(1000)
+    stopMoving(4000)
+})
